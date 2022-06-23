@@ -23,6 +23,8 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
 import { Badge } from '@chakra-ui/react'
 import { AspectRatio } from '@chakra-ui/react'
+import { Fade, ScaleFade, Slide, SlideFade, Collapse } from '@chakra-ui/react'
+
 
 //Chakra UI Typography components
 import { Heading } from '@chakra-ui/react'
@@ -35,59 +37,158 @@ import React, { useState, useEffect } from 'react';
 import ProcessResponseData from '../utils/processData';
 
 
+function CreateIngredientsList(meal) {
+    let ingredients = [];
+    let measure = [];
+    let ingredientList = [];
+    /*
+    Values in the meal data for the ingredients isn´t an array
+    but last char is a nuber in 1 to 20 
+    read all the ingredients and create an array of ingredients
+    ignore the values with a empty string or string written as "null"
+
+    after that do the same for the measures
+
+    join the ingredients and measures "ingredient - measure" 
+    then return the array
+    */
+
+    for (let i = 1; i < 21; i++) {
+        if (meal.hasOwnProperty(`strIngredient${i}`)) {
+            if (meal[`strIngredient${i}`] !== "") {
+                if (meal[`strIngredient${i}`] !== "null") {
+                    ingredients.push(meal[`strIngredient${i}`]);
+                }
+            }
+        }
+    }
+
+
+    for (let i = 1; i < 21; i++) {
+        if (meal.hasOwnProperty(`strMeasure${i}`)) {
+            if (meal[`strMeasure${i}`] !== "") {
+                if (meal[`strMeasure${i}`] !== "null") {
+                    measure.push(meal[`strMeasure${i}`]);
+                }
+            }
+        }
+    }
+
+    for (let i = 0; i < ingredients.length; i++) {
+        ingredientList.push(`${ingredients[i]} - ${measure[i]}`);
+    }
+
+    return ingredientList;
+}
+
 
 export default function RandomMeal(){
+    //Api
     let url = "https://www.themealdb.com/api/json/v1/1/random.php";
-
-
-    //Make a call to the API to get a random meal
-    //and set the name of the meal to the state
+    
+    //Meal data object
     const [meal, setMeal] = useState({});
+
+    //Ingredients data list
+    const [ingredients, setIngredients] = useState([]);
 
     useEffect(() => {
         axios.get(url)
         .then(response => {
             setMeal(response.data.meals[0]);
-        }
-        )
+            let ingredientList = CreateIngredientsList(response.data.meals[0]);
+            // Insert each ingredient in the ingredients list
+            setIngredients(ingredientList);
+        })
         .catch(error => {
             console.log(error);
         }
         );
-    }, []);
+    }, [url]);
 
-    //If the meal is null, return a skeleton
-    if(meal === null){
-        return(
-            <Box>
-                <Skeleton
-                    height="100px"
-                    width="100px"
-                    rounded="full"
-                    mx="auto"
-                    my="20px"
-                />
-            </Box>
-        );
-    }
 
+    // Text modal
+    const [TextShow, seTextShow] = React.useState(false)
+    const handleToggle = () => seTextShow(!TextShow)
+
+    // Ingredients modal
+    const [IngredientsShow, setIngredientsShow] = React.useState(false)
+    const handleToggleIngredients = () => setIngredientsShow(!IngredientsShow)
+    	
     return (
-        <Stack direction='column' maxW={500} spacing={5}>
-            <Box>
-                <Heading align="left">
-                    {meal.strMeal}
-                </Heading>
-                <Badge variantColor="green">
-                    {meal.strCategory}
-                </Badge >
-                <Badge variantColor="yellow">
-                    {meal.strArea}
-                </Badge > 
-            </Box>
+        <Box maxW={500}>
+            <Stack direction='column' spacing={4} alignItems='center'>
+            {/* Heading */}
+                <Box>
+                    <Heading align="left">
+                        {meal.strMeal}
+                    </Heading>
+                </Box>
+            {/* Badges */}
+                <Stack direction='row'>
+                    <Box>
+                        <Badge color={'black'} variant={'subtle'} bgColor={'yellow'}>
+                            {meal.strCategory}
+                        </Badge>
+                    </Box>
+                    <Box>
+                        <Badge color={'black'} variant={'subtle'} bgColor={'cyan'}>
+                            {meal.strArea}
+                        </Badge >
+                    </Box> 
+                </Stack>
             <Divider />
-            <Box>
-                <Image width="100%" height="100%" src={meal.strMealThumb} alt={meal.strMeal} />
-            </Box>
-        </Stack>
+            {/* Image */}
+                <Box>
+                    <Image width="400px" height="400px" src={meal.strMealThumb} alt={meal.strMeal} />
+                </Box>
+            <Divider />
+            {/* Ingredients */}
+                <Box justifySelf={'start'}>
+                <Heading>
+                        Ingredients
+                    </Heading>
+                    <Collapse startingHeight={20} in={IngredientsShow}>
+                        <UnorderedList alignItems={'start'}>
+                            {ingredients.map((ingredient, index) => (
+                                <ListItem key={index}>
+                                    {ingredient}
+                                </ListItem>
+                            ))}
+                        </UnorderedList>
+                    </Collapse>
+                    <Button size='sm' onClick={handleToggleIngredients} mt='1rem'>
+                        Show {IngredientsShow ? 'Less' : 'More'}
+                    </Button>
+                </Box>
+
+            {/* Instructions */}
+                <Box>
+                    <Heading>
+                        Instructions
+                    </Heading>
+                    <Collapse startingHeight={20} in={TextShow}>
+                        <Text fontStyle={'italic'} fontWeight={'light'}>
+                            {meal.strInstructions}
+                        </Text>
+                    </Collapse>
+                    <Button size='sm' onClick={handleToggle} mt='1rem'>
+                        Show {TextShow ? 'Less' : 'More'}
+                    </Button>
+                </Box>
+
+
+            {/* Youtube */}
+            </Stack>
+            <Box paddingTop={10}>
+                    <AspectRatio maxW='400px' ratio={1} paddingTop={5}>
+                    <iframe
+                        title='naruto'
+                        src={meal.strYoutube}
+                        allowFullScreen = 'true'
+                    />
+                    </AspectRatio>
+                </Box>
+        </Box>
     )
 }
