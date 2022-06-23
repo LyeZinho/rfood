@@ -76,7 +76,7 @@ export default function Home() {
               </Box>
           </Center>
           <Center>
-            <Box paddingTop={180}>
+            <Box paddingTop={90}>
               <Heading>Scrooll down</Heading>
             </Box>
         </Center>
