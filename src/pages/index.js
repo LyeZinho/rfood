@@ -33,6 +33,7 @@ import SponsorModal from '../components/sponsor'
 
 //Theme
 import theme from '../components/theme'
+
 //Color Mode
 import { ColorModeScript } from '@chakra-ui/react'
 
@@ -46,11 +47,14 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>rFood</title>
         <meta name="description" content="🍔Random food recipes generator😋" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {/* Theme */}
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+
       <Stack direction={'column'} spacing={50}>
         <Center paddingTop={50}>
             <Heading as="h1" size="3xl">
@@ -72,7 +76,7 @@ export default function Home() {
               </Box>
           </Center>
           <Center>
-            <Box paddingTop={200}>
+            <Box paddingTop={180}>
               <Heading>Scrooll down</Heading>
             </Box>
         </Center>
