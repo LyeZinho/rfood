@@ -49,7 +49,7 @@ export default function Home() {
       <Head>
         <title>rFood</title>
         <meta name="description" content="🍔Random food recipes generator😋" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="icons/favicon.ico" />
       </Head>
 
       {/* Theme */}
@@ -65,7 +65,7 @@ export default function Home() {
             <Box>
               <Box>
                 <Button onClick={Refresh} shadow={'dark-lg'}>
-                  🍔 Get more random foods
+                  😋 Get more random foods
                 </Button>
               </Box>
             </Box>
