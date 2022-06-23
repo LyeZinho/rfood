@@ -181,11 +181,11 @@ export default function RandomMeal(){
             {/* Youtube */}
             </Stack>
             <Box paddingTop={10}>
-                    <AspectRatio maxW='400px' ratio={1} paddingTop={5}>
+                    <AspectRatio maxW='560px' maxH={500} ratio={1} paddingTop={5}>
                     <iframe
                         title='naruto'
                         src={meal.strYoutube}
-                        allowFullScreen = 'true'
+                        allowFullScreen = {true}
                     />
                     </AspectRatio>
                 </Box>
