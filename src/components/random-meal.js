@@ -196,8 +196,7 @@ export default function RandomMeal(){
                         width="100%" 
                         height="100%" 
                         src={meal.strYoutube}
-                        frameborder="0" 
-                        allowfullscreen>
+                        allowFullScreen>
                         </iframe>
                     </AspectRatio>
                 </Box>
