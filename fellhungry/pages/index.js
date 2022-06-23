@@ -1,12 +1,34 @@
 //Next / React 
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+//Chakra Grid components
+import { Box } from '@chakra-ui/react'
+import { Center, Square, Circle } from '@chakra-ui/react'
+import { Stack, HStack, VStack } from '@chakra-ui/react'
+import { Wrap, WrapItem } from '@chakra-ui/react'
 
 //Chakra UI components
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
+import { Image } from '@chakra-ui/react'
+import {
+    List,
+    ListItem,
+    ListIcon,
+    OrderedList,
+    UnorderedList,
+} from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 
 
+//Chakra UI Typography components
+import { Heading } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
+
+//Components
+import RandomMeal from '../components/random-meal'
 
 export default function Home() {
   return (
@@ -17,7 +39,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
+      <Box>
+        <RandomMeal />
+      </Box>
     </div>
   )
 }
