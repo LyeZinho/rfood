@@ -33,8 +33,8 @@ import { Text } from '@chakra-ui/react'
 //React / Next
 import React, { useState, useEffect } from 'react';
 
-//Utils
-import ProcessResponseData from '../utils/processData';
+//Iframe
+import Iframe from 'react-iframe'
 
 
 function CreateIngredientsList(meal) {
@@ -82,6 +82,11 @@ function CreateIngredientsList(meal) {
 }
 
 
+function YtIframe(url){
+    let yUrl = url.replace("watch?v=", "embed/");
+    return(yUrl);
+}
+
 export default function RandomMeal(){
     //Api
     let url = "https://www.themealdb.com/api/json/v1/1/random.php";
@@ -95,7 +100,11 @@ export default function RandomMeal(){
     useEffect(() => {
         axios.get(url)
         .then(response => {
-            setMeal(response.data.meals[0]);
+            let meal = response.data.meals[0]
+
+            meal.strYoutube = YtIframe(meal.strYoutube);
+
+            setMeal(meal);
             let ingredientList = CreateIngredientsList(response.data.meals[0]);
             // Insert each ingredient in the ingredients list
             setIngredients(ingredientList);
@@ -114,7 +123,10 @@ export default function RandomMeal(){
     // Ingredients modal
     const [IngredientsShow, setIngredientsShow] = React.useState(false)
     const handleToggleIngredients = () => setIngredientsShow(!IngredientsShow)
-    	
+    
+    /*
+    Re
+    */
     return (
         <Box maxW={500}>
             <Stack direction='column' spacing={4} alignItems='center'>
@@ -176,17 +188,17 @@ export default function RandomMeal(){
                         Show {TextShow ? 'Less' : 'More'}
                     </Button>
                 </Box>
-
-
             {/* Youtube */}
             </Stack>
             <Box paddingTop={10}>
-                    <AspectRatio maxW='560px' maxH={500} ratio={1} paddingTop={5}>
-                    <iframe
-                        title='naruto'
+                    <AspectRatio ratio={3 / 2}>
+                        <iframe 
+                        width="100%" 
+                        height="100%" 
                         src={meal.strYoutube}
-                        allowFullScreen = {true}
-                    />
+                        frameborder="0" 
+                        allowfullscreen>
+                        </iframe>
                     </AspectRatio>
                 </Box>
         </Box>
