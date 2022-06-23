@@ -20,5 +20,10 @@
   "devDependencies": {
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6"
-  }
+  },
+  "description": "🥧 Random food generator for your next meal",
+  "main": "next.config.js",
+  "keywords": [],
+  "author": "LyePedro",
+  "license": "ISC"
 }
