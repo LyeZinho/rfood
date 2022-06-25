@@ -55,9 +55,9 @@ export default function Home() {
       {/* Theme */}
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      <Stack direction={'column'} spacing={50}>
+      <Stack direction={'column'} spacing={50} p={30}>
         <Center paddingTop={50}>
-            <Heading as="h1" size="3xl">
+            <Heading as="h1" size="2xl">
               🍔 Random Meal
               </Heading>
           </Center>
@@ -82,15 +82,15 @@ export default function Home() {
         </Center>
       </Stack>
       
-      <Box paddingBottom={100} paddingTop={200}>
-        <Stack spacing={8} direction={'row'} padding={5}>
-          <Box overflowX={'-moz-initial'}>
+      <Box paddingBottom={100} paddingTop={200} p={60}>
+        <Stack spacing={8} direction={'row'} >
+          <Box overflowX={'-moz-initial'} >
             <RandomMeal />
           </Box>
-          <Box overflowX={'-moz-initial'}>
+          <Box overflowX={'-moz-initial'} >
             <RandomMeal />
           </Box>
-          <Box overflowX={'-moz-initial'}>
+          <Box overflowX={'-moz-initial'} >
             <RandomMeal />
           </Box>
         </Stack>
