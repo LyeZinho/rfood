@@ -152,7 +152,7 @@ export default function RandomMeal(){
             <Divider />
             {/* Image */}
                 <Box>
-                    <Image src={meal.strMealThumb} alt={meal.strMeal} w={'lg'} h={'sm'}/>    
+                    <Image src={meal.strMealThumb} alt={meal.strMeal} w={'auto'} h={'auto'}/>    
                 </Box>
             <Divider />
             {/* Ingredients */}
