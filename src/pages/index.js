@@ -82,7 +82,7 @@ export default function Home() {
         </Center>
       </Stack>
       
-      <Box paddingBottom={100} paddingTop={200} p={60}>
+      <Box paddingBottom={100} paddingTop={200} p={30}>
         <Stack spacing={8} direction={'row'} >
           <Box overflowX={'-moz-initial'} >
             <RandomMeal />
