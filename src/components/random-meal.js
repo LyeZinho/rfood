@@ -128,11 +128,11 @@ export default function RandomMeal(){
     Re
     */
     return (
-        <Box maxW={500}>
+        <Box maxW={'xl'}>
             <Stack direction='column' spacing={4} alignItems='center'>
             {/* Heading */}
                 <Box>
-                    <Heading align="left">
+                    <Heading align="left" fontSize={'xl'}>
                         {meal.strMeal}
                     </Heading>
                 </Box>
@@ -152,7 +152,7 @@ export default function RandomMeal(){
             <Divider />
             {/* Image */}
                 <Box>
-                    <Image width="400px" height="400px" src={meal.strMealThumb} alt={meal.strMeal} />
+                    <Image src={meal.strMealThumb} alt={meal.strMeal} w={'lg'} h={'sm'}/>    
                 </Box>
             <Divider />
             {/* Ingredients */}
