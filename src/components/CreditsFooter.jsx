@@ -6,14 +6,6 @@ export default function CreditsFooter() {
     return (
         <div className="flex justify-center items-center flex-col space-y-4 bg-white rounded-2xl shadow-2xl my-10 p-4">
             <div className="flex justify-center items-center flex-col space-y-10">
-                <h1 className="text-6xl font-bold text-black">Random Food</h1>
-                <Image
-                    src="/logo.png"
-                    alt="logo"
-                    width={100}
-                    height={100}
-                    className="transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"
-                />
             </div>
             <div className="flex justify-center items-center flex-col space-y-4">
                 <h1 className="text-2xl font-bold text-black">

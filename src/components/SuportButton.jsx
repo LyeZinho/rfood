@@ -11,7 +11,9 @@ export default function SuportButton() {
                 cursor-pointer hover:border-blue-500 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110
                 animate-bounce
             "
-        onClick={() => window.open("/suport")}
+        onClick={() => {
+          window.location.href = "/suport";
+        }}
       >
         Suport Me :D
       </button>
